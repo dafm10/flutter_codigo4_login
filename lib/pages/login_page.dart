@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
+import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/text_widget.dart';
@@ -15,15 +16,13 @@ class LoginPage extends StatelessWidget {
     final ResponsiveUI responsive = ResponsiveUI(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("LoginApp"),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: responsive.hp(10),),
               Image.network(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Escudo_de_Trujillo_%28Perú%29.svg/1200px-Escudo_de_Trujillo_%28Perú%29.svg.png",
                 height: responsive.hp(20),
@@ -46,26 +45,10 @@ class LoginPage extends StatelessWidget {
               ),
               InputFieldNormalWidget(),
               InputFieldPasswordWidget(),
-              Container(
-                width: double.infinity,
-                height: 50.0,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                      side: BorderSide.none,
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    "Iniciar Sesión",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: 10.0,
               ),
+              ButtomNormalWidget(),
             ],
           ),
         ),
