@@ -5,7 +5,16 @@ import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InputFieldNormalWidget extends StatelessWidget {
-  const InputFieldNormalWidget({Key? key}) : super(key: key);
+
+  //String icon;
+  String hintText;
+  bool isNumeric;
+
+  InputFieldNormalWidget({
+    //required this.icon,
+    required this.hintText,
+    required this.isNumeric,
+});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +29,13 @@ class InputFieldNormalWidget extends StatelessWidget {
         ],
       ),
       child: TextField(
-        keyboardType: TextInputType.number,
+        keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
         maxLength: 8,
-        inputFormatters: [
+        inputFormatters: isNumeric ? [
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-        ],
+        ] : [],
         decoration: InputDecoration(
-          hintText: "DNI",
+          hintText: hintText,
           hintStyle: TextStyle(
             color: COLOR_FONT_PRIMARY.withOpacity(0.4),
           ),

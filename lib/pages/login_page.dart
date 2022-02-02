@@ -46,7 +46,10 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
-              InputFieldNormalWidget(),
+              InputFieldNormalWidget(
+                isNumeric: true,
+                hintText: "DNI",
+              ),
               InputFieldPasswordWidget(),
               const SizedBox(
                 height: 10.0,

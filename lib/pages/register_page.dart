@@ -43,10 +43,22 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
-              InputFieldNormalWidget(),
-              InputFieldNormalWidget(),
-              InputFieldNormalWidget(),
-              InputFieldNormalWidget(),
+              InputFieldNormalWidget(
+                isNumeric: false,
+                hintText: "Nombres",
+              ),
+              InputFieldNormalWidget(
+                isNumeric: true,
+                hintText: "DNI",
+              ),
+              InputFieldNormalWidget(
+                isNumeric: true,
+                hintText: "Teléfono",
+              ),
+              InputFieldNormalWidget(
+                isNumeric: false,
+                hintText: "Dirección",
+              ),
               InputFieldPasswordWidget(),
               const SizedBox(
                 height: 10.0,
