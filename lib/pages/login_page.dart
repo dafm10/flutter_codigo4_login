@@ -48,7 +48,10 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 height: 10.0,
               ),
-              ButtomNormalWidget(),
+              ButtomNormalWidget(
+                text: "Iniciar Sesión",
+                onPressed: (){},
+              ),
             ],
           ),
         ),

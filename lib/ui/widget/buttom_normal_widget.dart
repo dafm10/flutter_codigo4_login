@@ -2,7 +2,14 @@
 import 'package:flutter/material.dart';
 
 class ButtomNormalWidget extends StatelessWidget {
-  const ButtomNormalWidget({Key? key}) : super(key: key);
+
+  String text;
+  Function onPressed;
+
+  ButtomNormalWidget({
+    required this.text,
+    required this.onPressed,
+});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +23,11 @@ class ButtomNormalWidget extends StatelessWidget {
             side: BorderSide.none,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          onPressed();
+        },
         child: Text(
-          "Iniciar Sesión",
+          text,
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
