@@ -25,7 +25,7 @@ class _InputFieldPasswordWidgetState extends State<InputFieldPasswordWidget> {
               blurRadius: 12.0),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         obscureText: isInvisible,
         decoration: InputDecoration(
           hintText: "Contraseña",
@@ -73,6 +73,12 @@ class _InputFieldPasswordWidgetState extends State<InputFieldPasswordWidget> {
             borderSide: BorderSide.none,
           ),
         ),
+        validator: (String? value){
+          if(value!.isEmpty){
+            return "El campo no puede estar vaciío";
+          }
+          return null;
+        },
       ),
     );
   }

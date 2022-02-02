@@ -31,7 +31,7 @@ class InputFieldNormalWidget extends StatelessWidget {
               blurRadius: 12.0),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
         maxLength: isNumeric ? typeInput == TypeInputTextField.dni ? 8 : 9 : null,
         inputFormatters: isNumeric ? [
@@ -72,6 +72,18 @@ class InputFieldNormalWidget extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
         ),
+        validator: (String? value){
+          if(value!.isEmpty){
+            return "El campo no puede estar vaciío";
+          }
+          if(typeInput == TypeInputTextField.dni && value!.length < 8 ){
+            return "El campo debe tener 8 caracteres";
+          }
+          if(typeInput == TypeInputTextField.phone && value!.length < 9 ){
+            return "El campo debe tener 9 caracteres";
+          }
+          return null;
+        },
       ),
     );
   }

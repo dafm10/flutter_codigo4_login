@@ -8,7 +8,9 @@ import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart
 import 'package:flutter_codigo4_login/ui/widget/text_widget.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,65 +21,72 @@ class RegisterPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(14.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: responsive.hp(10),
-              ),
-              Image.network(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Escudo_de_Trujillo_%28Perú%29.svg/1200px-Escudo_de_Trujillo_%28Perú%29.svg.png",
-                height: responsive.hp(14),
-              ),
-              H1(
-                text: "Trujillo Seguro",
-              ),
-              const SizedBox(
-                height: 4.0,
-              ),
-              H6(text: "Municipalidad Provincial de Trujillo"),
-              const SizedBox(
-                height: 20.0,
-              ),
-              H2(
-                text: "Registro",
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              InputFieldNormalWidget(
-                isNumeric: false,
-                hintText: "Nombres",
-                icon: 'bx-user',
-              ),
-              InputFieldNormalWidget(
-                isNumeric: true,
-                hintText: "DNI",
-                icon: 'bx-id',
-                typeInput: TypeInputTextField.dni,
-              ),
-              InputFieldNormalWidget(
-                isNumeric: true,
-                hintText: "Teléfono",
-                icon: 'bx-phone',
-                typeInput: TypeInputTextField.phone,
-              ),
-              InputFieldNormalWidget(
-                isNumeric: false,
-                hintText: "Dirección",
-                icon: 'bx-map',
-              ),
-              InputFieldPasswordWidget(),
-              const SizedBox(
-                height: 10.0,
-              ),
-              ButtomNormalWidget(
-                text: "Registrar",
-                onPressed: () {},
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: responsive.hp(10),
+                ),
+                Image.network(
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Escudo_de_Trujillo_%28Perú%29.svg/1200px-Escudo_de_Trujillo_%28Perú%29.svg.png",
+                  height: responsive.hp(14),
+                ),
+                H1(
+                  text: "Trujillo Seguro",
+                ),
+                const SizedBox(
+                  height: 4.0,
+                ),
+                H6(text: "Municipalidad Provincial de Trujillo"),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                H2(
+                  text: "Registro",
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                InputFieldNormalWidget(
+                  isNumeric: false,
+                  hintText: "Nombres",
+                  icon: 'bx-user',
+                ),
+                InputFieldNormalWidget(
+                  isNumeric: true,
+                  hintText: "DNI",
+                  icon: 'bx-id',
+                  typeInput: TypeInputTextField.dni,
+                ),
+                InputFieldNormalWidget(
+                  isNumeric: true,
+                  hintText: "Teléfono",
+                  icon: 'bx-phone',
+                  typeInput: TypeInputTextField.phone,
+                ),
+                InputFieldNormalWidget(
+                  isNumeric: false,
+                  hintText: "Dirección",
+                  icon: 'bx-map',
+                ),
+                InputFieldPasswordWidget(),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                ButtomNormalWidget(
+                  text: "Registrar",
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),
