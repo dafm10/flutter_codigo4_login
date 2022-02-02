@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/pages/register_page.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
@@ -49,6 +50,8 @@ class LoginPage extends StatelessWidget {
               InputFieldNormalWidget(
                 isNumeric: true,
                 hintText: "DNI",
+                icon: 'bx-id',
+                typeInput: TypeInputTextField.dni,
               ),
               InputFieldPasswordWidget(),
               const SizedBox(

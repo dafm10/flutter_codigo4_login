@@ -1,19 +1,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InputFieldNormalWidget extends StatelessWidget {
 
-  //String icon;
+  String icon;
   String hintText;
   bool isNumeric;
+  TypeInputTextField? typeInput;
 
   InputFieldNormalWidget({
-    //required this.icon,
+    required this.icon,
     required this.hintText,
     required this.isNumeric,
+    this.typeInput,
 });
 
   @override
@@ -30,7 +33,7 @@ class InputFieldNormalWidget extends StatelessWidget {
       ),
       child: TextField(
         keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
-        maxLength: 8,
+        maxLength: isNumeric ? typeInput == TypeInputTextField.dni ? 8 : 9 : null,
         inputFormatters: isNumeric ? [
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
         ] : [],
@@ -40,7 +43,7 @@ class InputFieldNormalWidget extends StatelessWidget {
             color: COLOR_FONT_PRIMARY.withOpacity(0.4),
           ),
           prefixIcon: SvgPicture.asset(
-            'assets/icons/bx-id.svg',
+            'assets/icons/$icon.svg',
             color: COLOR_FONT_PRIMARY.withOpacity(0.4),
             height: 14,
             fit: BoxFit.scaleDown,

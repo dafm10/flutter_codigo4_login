@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
@@ -46,25 +47,31 @@ class RegisterPage extends StatelessWidget {
               InputFieldNormalWidget(
                 isNumeric: false,
                 hintText: "Nombres",
+                icon: 'bx-user',
               ),
               InputFieldNormalWidget(
                 isNumeric: true,
                 hintText: "DNI",
+                icon: 'bx-id',
+                typeInput: TypeInputTextField.dni,
               ),
               InputFieldNormalWidget(
                 isNumeric: true,
                 hintText: "Teléfono",
+                icon: 'bx-phone',
+                typeInput: TypeInputTextField.phone,
               ),
               InputFieldNormalWidget(
                 isNumeric: false,
                 hintText: "Dirección",
+                icon: 'bx-map',
               ),
               InputFieldPasswordWidget(),
               const SizedBox(
                 height: 10.0,
               ),
               ButtomNormalWidget(
-                text: "Iniciar Sesión",
+                text: "Registrar",
                 onPressed: () {},
               ),
               const SizedBox(
