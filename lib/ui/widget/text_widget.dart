@@ -83,3 +83,21 @@ class H6 extends StatelessWidget {
   }
 }
 
+class H6Bold extends StatelessWidget {
+  final String text;
+
+  H6Bold({
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextWidget(
+      text: text,
+      fontSize: H6_SIZE,
+      colorText: COLOR_FONT_PRIMARY,
+      fontWeight: FontWeight.bold,
+    );
+  }
+}
+

@@ -22,7 +22,9 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: responsive.hp(10),),
+              SizedBox(
+                height: responsive.hp(10),
+              ),
               Image.network(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Escudo_de_Trujillo_%28Perú%29.svg/1200px-Escudo_de_Trujillo_%28Perú%29.svg.png",
                 height: responsive.hp(20),
@@ -40,17 +42,30 @@ class LoginPage extends StatelessWidget {
               H2(
                 text: "Iniciar Sesión",
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               InputFieldNormalWidget(),
               InputFieldPasswordWidget(),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               ButtomNormalWidget(
                 text: "Iniciar Sesión",
-                onPressed: (){},
+                onPressed: () {},
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  H6(text: "¿No estás registrado?, "),
+                  GestureDetector(
+                    onTap: (){},
+                    child: H6Bold(text: "Regístrate"),
+                  ),
+                ],
               ),
             ],
           ),
