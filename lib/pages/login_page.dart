@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
+import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:flutter_codigo4_login/pages/register_page.dart';
 import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
@@ -15,8 +16,22 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _dniController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   APIService apiService = APIService();
+
+  _login() {
+    if (_formKey.currentState!.validate()) {
+      User _user = User(
+        username: _dniController.text,
+        password: _passwordController.text,
+      );
+      apiService.login(_user).then((value) {
+        print(value);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +74,18 @@ class LoginPage extends StatelessWidget {
                   hintText: "DNI",
                   icon: 'bx-id',
                   typeInput: TypeInputTextField.dni,
+                  controller: _dniController,
                 ),
-                InputFieldPasswordWidget(),
+                InputFieldPasswordWidget(
+                  controller: _passwordController,
+                ),
                 const SizedBox(
                   height: 10.0,
                 ),
                 ButtomNormalWidget(
                   text: "Iniciar Sesión",
                   onPressed: () {
-                    apiService.login();
-                    if(_formKey.currentState!.validate()){
-                      apiService.login();
-                    }
+                    _login();
                   },
                 ),
                 const SizedBox(

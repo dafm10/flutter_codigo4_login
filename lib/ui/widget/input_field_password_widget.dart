@@ -3,7 +3,12 @@ import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InputFieldPasswordWidget extends StatefulWidget {
-  const InputFieldPasswordWidget({Key? key}) : super(key: key);
+
+  TextEditingController? controller;
+
+  InputFieldPasswordWidget({
+    this.controller,
+});
 
   @override
   _InputFieldPasswordWidgetState createState() =>
@@ -26,6 +31,7 @@ class _InputFieldPasswordWidgetState extends State<InputFieldPasswordWidget> {
         ],
       ),
       child: TextFormField(
+        controller: widget.controller,
         obscureText: isInvisible,
         decoration: InputDecoration(
           hintText: "Contraseña",

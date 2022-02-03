@@ -5,22 +5,24 @@ class User {
   String? apellido;
   int? id;
   String? nombreCompleto;
-  String dni;
+  String? dni;
   String? telefono;
   String? direccion;
   String? password;
-  String? tokern;
+  String? token;
+  String? username;
 
   User({
     this.nombre,
     this.apellido,
     this.id,
     this.nombreCompleto,
-    required this.dni,
+    this.dni,
     this.telefono,
     this.direccion,
     this.password,
-    this.tokern,
+    this.token,
+    this.username
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -32,7 +34,7 @@ class User {
     telefono: json["telefono"],
     direccion: json["direccion"],
     //password: json["password"],
-    tokern: json["tokern"],
+    token: json["tokern"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +46,7 @@ class User {
     "telefono": telefono,
     "direccion": direccion,
     "password": password,
-    "tokern": tokern,
+    "tokern": token,
+    "username": username,
   };
 }

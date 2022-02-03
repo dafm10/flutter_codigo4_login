@@ -11,12 +11,14 @@ class InputFieldNormalWidget extends StatelessWidget {
   String hintText;
   bool isNumeric;
   TypeInputTextField? typeInput;
+  TextEditingController? controller;
 
   InputFieldNormalWidget({
     required this.icon,
     required this.hintText,
     required this.isNumeric,
     this.typeInput,
+    this.controller,
 });
 
   @override
@@ -32,6 +34,7 @@ class InputFieldNormalWidget extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        controller: controller,
         keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
         maxLength: isNumeric ? typeInput == TypeInputTextField.dni ? 8 : 9 : null,
         inputFormatters: isNumeric ? [

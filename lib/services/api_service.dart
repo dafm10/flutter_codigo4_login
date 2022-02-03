@@ -10,25 +10,26 @@ import 'package:http/http.dart' as http;
 class APIService {
   Logger logger = Logger();
 
-  Future<User?> login() async {
+  Future<User?> login(User user) async {
     try {
       String _path = pathProduction + "/login/";
       Uri _uri = Uri.parse(_path);
+      print(user.toJson());
       http.Response response = await http.post(
         _uri,
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-        body: json.encode(
+        /*body: json.encode(
           {
             "username": "44888982",
             "password": "clave123",
           },
-        ),
+        ),*/
+        body: json.encode(user.toJson()),
       );
       if(response.statusCode == 200){
-        print(response.body);
         Map<String, dynamic> myMap = json.decode(response.body);
         User user = User.fromJson(myMap["user"]);
         return user;
