@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/pages/register_page.dart';
+import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
@@ -14,6 +15,8 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+
+  APIService apiService = APIService();
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +67,9 @@ class LoginPage extends StatelessWidget {
                 ButtomNormalWidget(
                   text: "Iniciar Sesión",
                   onPressed: () {
+                    apiService.login();
                     if(_formKey.currentState!.validate()){
-
+                      apiService.login();
                     }
                   },
                 ),
