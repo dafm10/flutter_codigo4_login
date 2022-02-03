@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:logger/logger.dart';
@@ -48,7 +49,7 @@ class APIService {
     }
   }
 
-  register() async {
+  Future<User?> register() async {
     try {
       String _path = pathProduction + "/registro/";
       Uri _uri = Uri.parse(_path);
@@ -66,12 +67,23 @@ class APIService {
           "direccion": "Av. Tapia 232"
         }),
       );
-      print(response.statusCode);
-      print(response.body);
-      if(response.statusCode == 200){
+      //logger.e(response.statusCode);
+      //logger.w(response.body);
+      if(response.statusCode == 201){
+        String source = Utf8Decoder().convert(response.bodyBytes);
+        Map<String, dynamic> myMap = json.decode(source);
+        User user = User.fromJson(myMap);
+        return user;
+      }else if(response.statusCode == 400){
+        Map<String, dynamic> myMap = json.decode(response.body);
+        List resPhone = myMap["telefono"] ?? [];
+        List resDni = myMap["dni"] ?? [];
 
-      }else if (){
-
+        User user = User(
+          dni: resDni.isNotEmpty ? resDni.first : "",
+          telefono: resPhone.isNotEmpty ? resPhone.first : "",
+        );
+        return user;
       }
     } on TimeoutException catch (e) {
       logger.i(e);
