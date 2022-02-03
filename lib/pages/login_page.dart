@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
+import 'package:flutter_codigo4_login/ui/widget/general_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/text_widget.dart';
@@ -33,9 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   _login() {
     if (_formKey.currentState!.validate()) {
       isLoading = true;
-      setState(() {
-
-      });
+      setState(() {});
 
       User _user = User(
         username: _dniController.text,
@@ -43,9 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       );
       apiService.login(_user).then((value) {
         isLoading = false;
-        setState(() {
-
-        });
+        setState(() {});
         if (value != null) {
           //pushAndRemoveUntil hace que la pagina login se elimine y vaya a la siguiente página
           Navigator.pushAndRemoveUntil(
@@ -55,64 +51,20 @@ class _LoginPageState extends State<LoginPage> {
           //Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
         } else {
           isLoading = false;
-          setState(() {
-
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: COLOR_FONT_PRIMARY,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              behavior: SnackBarBehavior.floating,
-              duration: Duration(seconds: 3),
-              content: Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/icons/error.svg",
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  Expanded(
-                    child: Text(
-                        "Hubo un inconveniente. Por favor intenta nuevamente"),
-                  ),
-                ],
-              ),
-            ),
+          setState(() {});
+          showSnackErrorMessage(
+            context,
+            "error",
+            "Hubo un inconveniente. Por favor, inténtalo nuevamente.",
           );
         }
       }).catchError((error) {
         isLoading = false;
-        setState(() {
-
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: COLOR_FONT_PRIMARY,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 3),
-            content: Row(
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/cloud.svg",
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 8.0,
-                ),
-                Expanded(
-                  child: Text(
-                      "Hubo un error. Revisa tu conexión a internet e inténtalo nuevamente"),
-                ),
-              ],
-            ),
-          ),
+        setState(() {});
+        showSnackErrorMessage(
+          context,
+          "error",
+          "Hubo un error. Revisa tu conexión a internet e inténtalo nuevamente.",
         );
       });
     }
@@ -206,12 +158,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          isLoading ? Container(
-            color: Colors.white60,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ) : Container(),
+          isLoading
+              ? Container(
+                  color: Colors.white60,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

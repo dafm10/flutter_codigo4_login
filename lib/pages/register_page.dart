@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
+import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
@@ -11,6 +12,8 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+
+  APIService _apiService = APIService();
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +80,7 @@ class RegisterPage extends StatelessWidget {
                 ButtomNormalWidget(
                   text: "Registrar",
                   onPressed: () {
+                    _apiService.register();
                     if(_formKey.currentState!.validate()){
 
                     }

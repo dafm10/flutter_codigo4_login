@@ -30,13 +30,49 @@ class APIService {
         ),*/
         body: json.encode(user.toJson()),
       );
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         Map<String, dynamic> myMap = json.decode(response.body);
         User user = User.fromJson(myMap["user"]);
         user.token = myMap["access"];
         return user;
       }
+    } on TimeoutException catch (e) {
+      logger.i(e);
+      return Future.error("Error internet 1");
+    } on SocketException catch (e) {
+      logger.d(e);
+      return Future.error("Error internet 2");
+    } on Error catch (e) {
+      logger.e(e);
+      return Future.error("Error internet 3");
+    }
+  }
 
+  register() async {
+    try {
+      String _path = pathProduction + "/registro/";
+      Uri _uri = Uri.parse(_path);
+      http.Response response = await http.post(
+        _uri,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: json.encode({
+          "dni": "47707729",
+          "password": "3volution",
+          "nombreCompleto": "Felipe Montes",
+          "telefono": "969461011",
+          "direccion": "Av. Tapia 232"
+        }),
+      );
+      print(response.statusCode);
+      print(response.body);
+      if(response.statusCode == 200){
+
+      }else if (){
+
+      }
     } on TimeoutException catch (e) {
       logger.i(e);
       return Future.error("Error internet 1");
