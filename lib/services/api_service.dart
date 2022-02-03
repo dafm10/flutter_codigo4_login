@@ -23,10 +23,11 @@ class APIService {
         },
         /*body: json.encode(
           {
-            "username": "44888982",
-            "password": "clave123",
+            "username": user.username,
+            "password": user.password,
           },
         ),*/
+        // pdoemos usar cualqueira de los 2 body
         body: json.encode(user.toJson()),
       );
       if(response.statusCode == 200){
