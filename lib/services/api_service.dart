@@ -3,13 +3,14 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'package:flutter_codigo4_login/helpers/utils.dart';
+import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 
 class APIService {
   Logger logger = Logger();
 
-  Future login() async {
+  Future<User?> login() async {
     try {
       String _path = pathProduction + "/login/";
       Uri _uri = Uri.parse(_path);
@@ -27,11 +28,12 @@ class APIService {
         ),
       );
       if(response.statusCode == 200){
-        
+        print(response.body);
+        Map<String, dynamic> myMap = json.decode(response.body);
+        User user = User.fromJson(myMap["user"]);
+        return user;
       }
-      else{
 
-      }
     } on TimeoutException catch (e) {
       logger.i(e);
       return Future.error("Error internet 1");
