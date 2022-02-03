@@ -136,8 +136,12 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: responsive.hp(10),
                     ),
-                    Image.network(
+                    /*Image.network(
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Escudo_de_Trujillo_%28Perú%29.svg/1200px-Escudo_de_Trujillo_%28Perú%29.svg.png",
+                      height: responsive.hp(20),
+                    ),*/
+                    Image.asset(
+                      "assets/images/trujillo-escudo.jpg",
                       height: responsive.hp(20),
                     ),
                     H1(
@@ -150,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    H2(
+                    H3(
                       text: "Iniciar Sesión",
                     ),
                     const SizedBox(

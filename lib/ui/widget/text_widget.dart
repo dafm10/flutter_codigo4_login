@@ -65,6 +65,24 @@ class H2 extends StatelessWidget {
   }
 }
 
+class H3 extends StatelessWidget {
+  final String text;
+
+  H3({
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextWidget(
+      text: text,
+      fontSize: H3_SIZE,
+      colorText: COLOR_FONT_PRIMARY,
+      fontWeight: FontWeight.w400,
+    );
+  }
+}
+
 class H6 extends StatelessWidget {
   final String text;
 
