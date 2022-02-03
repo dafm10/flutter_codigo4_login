@@ -85,6 +85,10 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       }).catchError((error) {
+        isLoading = false;
+        setState(() {
+
+        });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: COLOR_FONT_PRIMARY,
