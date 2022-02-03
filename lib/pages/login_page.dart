@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/models/user_model.dart';
+import 'package:flutter_codigo4_login/pages/home_page.dart';
 import 'package:flutter_codigo4_login/pages/register_page.dart';
 import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/general/colors.dart';
@@ -12,11 +14,18 @@ import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart
 import 'package:flutter_codigo4_login/ui/widget/text_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController _dniController = TextEditingController();
+
   TextEditingController _passwordController = TextEditingController();
 
   APIService apiService = APIService();
@@ -28,7 +37,42 @@ class LoginPage extends StatelessWidget {
         password: _passwordController.text,
       );
       apiService.login(_user).then((value) {
-        print(value);
+        if (value != null) {
+          //pushAndRemoveUntil hace que la pagina login se elimine y vaya a la siguiente página
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+              (route) => false);
+          //Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: COLOR_FONT_PRIMARY,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              behavior: SnackBarBehavior.floating,
+              duration: Duration(seconds: 3),
+              content: Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/error.svg",
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Expanded(
+                    child: Text(
+                        "Hubo un inconveniente. Por favor intenta nuevamente"),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      }).catchError((error) {
+        print(error);
       });
     }
   }

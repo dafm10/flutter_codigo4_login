@@ -21,18 +21,19 @@ class APIService {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
+        // pdoemos usar cualqueira de los 2 body
         /*body: json.encode(
           {
             "username": user.username,
             "password": user.password,
           },
         ),*/
-        // pdoemos usar cualqueira de los 2 body
         body: json.encode(user.toJson()),
       );
       if(response.statusCode == 200){
         Map<String, dynamic> myMap = json.decode(response.body);
         User user = User.fromJson(myMap["user"]);
+        user.token = myMap["access"];
         return user;
       }
 
