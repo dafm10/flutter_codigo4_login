@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
-
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
@@ -16,12 +15,23 @@ class APIService {
       Uri _uri = Uri.parse(_path);
       http.Response response = await http.post(
         _uri,
-        body: {
-          "username": "44888982",
-          "password" : "clave123",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
         },
+        body: json.encode(
+          {
+            "username": "44888982",
+            "password": "clave123",
+          },
+        ),
       );
-      print("XXXXX ${response.statusCode}");
+      if(response.statusCode == 200){
+        
+      }
+      else{
+
+      }
     } on TimeoutException catch (e) {
       logger.i(e);
       return Future.error("Error internet 1");
