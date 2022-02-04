@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       );
       _apiService.updateUser(user).then((value) {
         if(value != null){
-          showSnackSucessMessage(context, 'cloud', "Datos actualizados correctamente,");
+          showSnackSucessMessage(context, 'user-check', "Datos actualizados correctamente,");
         }else{
           showSnackErrorMessage(context, 'error', "Ocurrió un error, inténtalo nuevamente,");
         }
