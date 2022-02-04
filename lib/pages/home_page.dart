@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_login/helpers/sp_global.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
+import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:flutter_codigo4_login/pages/login_page.dart';
 import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   SPGlobal prefs = SPGlobal();
   bool isLoading = true;
   final _keyForm = GlobalKey<FormState>();
+  int id = 0;
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _apiService.getUser().then((value) {
       if (value != null) {
+        id = value.id!;
         _nameController.text = value.nombreCompleto.toString();
         _dniController.text = value.dni.toString();
         _phoneController.text = value.telefono.toString();
@@ -46,7 +49,19 @@ class _HomePageState extends State<HomePage> {
 
   _updateUser(){
     if(_keyForm.currentState!.validate()){
+      User user = User(
+        id: id,
+        nombreCompleto: _nameController.text,
+        dni: _dniController.text,
+        telefono: _phoneController.text,
+        direccion: _addressController.text,
+        password: _passwordController.text,
+      );
+      _apiService.updateUser(user).then((value) {
 
+      }).catchError((error){
+
+      });
     }
   }
 
