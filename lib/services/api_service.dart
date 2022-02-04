@@ -100,4 +100,34 @@ class APIService {
       return Future.error("Error internet 3");
     }
   }
+
+  Future<User?> getUser()async{
+    try{
+      String _path = pathProduction + "/user/";
+      Uri _uri = Uri.parse(_path);
+      http.Response response = await http.get(
+        _uri,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Jwt "+_prefs.token,
+        },
+      );
+      if(response.statusCode == 200){
+        String source = Utf8Decoder().convert(response.bodyBytes);
+        Map<String, dynamic> myMap = json.decode(source);
+        User user = User.fromJson(myMap);
+        return user;
+      }
+    } on TimeoutException catch (e) {
+      logger.i(e);
+      return Future.error("Error internet 1");
+    } on SocketException catch (e) {
+      logger.d(e);
+      return Future.error("Error internet 2");
+    } on Error catch (e) {
+      logger.e(e);
+      return Future.error("Error internet 3");
+    }
+  }
 }
