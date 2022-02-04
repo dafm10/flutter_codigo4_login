@@ -54,8 +54,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 (route) => false);
           } else {
-            isLoading = false;
-            setState(() {});
             if (value.dni!.isNotEmpty) {
               showSnackErrorMessage(
                 context,
@@ -63,8 +61,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 "El DNI ya existe. Por favor ingresa otro DNI.",
               );
             } else if (value.telefono!.isNotEmpty) {
-              isLoading = false;
-              setState(() {});
               showSnackErrorMessage(
                 context,
                 "error",
@@ -72,6 +68,8 @@ class _RegisterPageState extends State<RegisterPage> {
               );
             }
           }
+          isLoading = false;
+          setState(() {});
         }
       }).catchError((error) {
         isLoading = false;
