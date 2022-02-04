@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {});
         showSnackErrorMessage(
           context,
-          "error",
+          "cloud",
           "Hubo un error. Revisa tu conexión a internet e inténtalo nuevamente.",
         );
       });

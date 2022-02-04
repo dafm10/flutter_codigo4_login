@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:logger/logger.dart';
@@ -49,7 +48,7 @@ class APIService {
     }
   }
 
-  Future<User?> register() async {
+  Future<User?> register(User user) async {
     try {
       String _path = pathProduction + "/registro/";
       Uri _uri = Uri.parse(_path);
@@ -59,13 +58,14 @@ class APIService {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-        body: json.encode({
+        /*body: json.encode({
           "dni": "47707729",
           "password": "3volution",
           "nombreCompleto": "Felipe Montes",
           "telefono": "969461011",
           "direccion": "Av. Tapia 232"
-        }),
+        }),*/
+        body: json.encode(user.toJson()),
       );
       //logger.e(response.statusCode);
       //logger.w(response.body);

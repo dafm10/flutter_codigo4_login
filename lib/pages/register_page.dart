@@ -1,19 +1,67 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
+import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/responsive/responsive.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
+import 'package:flutter_codigo4_login/ui/widget/general_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/text_widget.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   APIService _apiService = APIService();
+
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _dniController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  void _register(){
+    if(_formKey.currentState!.validate()){
+      User _user = User(
+        nombreCompleto: _nameController.text,
+        dni: _dniController.text,
+        telefono: _phoneController.text,
+        direccion: _addressController.text,
+        password: _passwordController.text,
+      );
+      _apiService.register(_user).then((value) {
+        if(value != null){
+          if(value.id != null){
+            // ir a home
+          }else{
+            if(value.dni!.isNotEmpty){
+              showSnackErrorMessage(
+                context,
+                "error",
+                "El DNI ya existe. Por favor ingresa otro DNI.",
+              );
+            }else if(value.telefono!.isNotEmpty){
+              showSnackErrorMessage(
+                context,
+                "error",
+                "El teléfono ya existe. Por favor ingresa otro teléfono",
+              );
+            }
+          }
+        }
+      }).catchError((error){
+
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,35 +103,38 @@ class RegisterPage extends StatelessWidget {
                   isNumeric: false,
                   hintText: "Nombres",
                   icon: 'bx-user',
+                  controller: _nameController,
                 ),
                 InputFieldNormalWidget(
                   isNumeric: true,
                   hintText: "DNI",
                   icon: 'bx-id',
                   typeInput: TypeInputTextField.dni,
+                  controller: _dniController,
                 ),
                 InputFieldNormalWidget(
                   isNumeric: true,
                   hintText: "Teléfono",
                   icon: 'bx-phone',
                   typeInput: TypeInputTextField.phone,
+                  controller: _phoneController,
                 ),
                 InputFieldNormalWidget(
                   isNumeric: false,
                   hintText: "Dirección",
                   icon: 'bx-map',
+                  controller: _addressController,
                 ),
-                InputFieldPasswordWidget(),
+                InputFieldPasswordWidget(
+                  controller: _passwordController,
+                ),
                 const SizedBox(
                   height: 10.0,
                 ),
                 ButtomNormalWidget(
                   text: "Registrar",
                   onPressed: () {
-                    _apiService.register();
-                    if(_formKey.currentState!.validate()){
-
-                    }
+                    _register();
                   },
                 ),
                 const SizedBox(
