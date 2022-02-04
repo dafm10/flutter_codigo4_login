@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   SPGlobal prefs = SPGlobal();
   bool isLoading = true;
+  final _keyForm = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -43,6 +44,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  _updateUser(){
+    if(_keyForm.currentState!.validate()){
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,60 +57,65 @@ class _HomePageState extends State<HomePage> {
         title: Text("Datos de Contacto"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _updateUser();
+        },
         child: Icon(Icons.save),
       ),
       body: !isLoading
           ? SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  children: [
-                    InputFieldNormalWidget(
-                      isNumeric: false,
-                      hintText: "Nombres",
-                      icon: 'bx-user',
-                      controller: _nameController,
-                    ),
-                    InputFieldNormalWidget(
-                      isNumeric: true,
-                      hintText: "DNI",
-                      icon: 'bx-id',
-                      typeInput: TypeInputTextField.dni,
-                      controller: _dniController,
-                    ),
-                    InputFieldNormalWidget(
-                      isNumeric: true,
-                      hintText: "Teléfono",
-                      icon: 'bx-phone',
-                      typeInput: TypeInputTextField.phone,
-                      controller: _phoneController,
-                    ),
-                    InputFieldNormalWidget(
-                      isNumeric: false,
-                      hintText: "Dirección",
-                      icon: 'bx-map',
-                      controller: _addressController,
-                    ),
-                    InputFieldPasswordWidget(
-                      controller: _passwordController,
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    ButtomNormalWidget(
-                      text: "Cerrar Sesión",
-                      color: Colors.redAccent,
-                      onPressed: () {
-                        prefs.token = "";
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                            (route) => false);
-                      },
-                    ),
-                  ],
+                child: Form(
+                  key: _keyForm,
+                  child: Column(
+                    children: [
+                      InputFieldNormalWidget(
+                        isNumeric: false,
+                        hintText: "Nombres",
+                        icon: 'bx-user',
+                        controller: _nameController,
+                      ),
+                      InputFieldNormalWidget(
+                        isNumeric: true,
+                        hintText: "DNI",
+                        icon: 'bx-id',
+                        typeInput: TypeInputTextField.dni,
+                        controller: _dniController,
+                      ),
+                      InputFieldNormalWidget(
+                        isNumeric: true,
+                        hintText: "Teléfono",
+                        icon: 'bx-phone',
+                        typeInput: TypeInputTextField.phone,
+                        controller: _phoneController,
+                      ),
+                      InputFieldNormalWidget(
+                        isNumeric: false,
+                        hintText: "Dirección",
+                        icon: 'bx-map',
+                        controller: _addressController,
+                      ),
+                      InputFieldPasswordWidget(
+                        controller: _passwordController,
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      ButtomNormalWidget(
+                        text: "Cerrar Sesión",
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          prefs.token = "";
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                              (route) => false);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
