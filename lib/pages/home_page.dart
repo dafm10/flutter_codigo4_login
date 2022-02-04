@@ -5,6 +5,7 @@ import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:flutter_codigo4_login/pages/login_page.dart';
 import 'package:flutter_codigo4_login/services/api_service.dart';
 import 'package:flutter_codigo4_login/ui/widget/buttom_normal_widget.dart';
+import 'package:flutter_codigo4_login/ui/widget/general_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_normal_widget.dart';
 import 'package:flutter_codigo4_login/ui/widget/input_field_password_widget.dart';
 
@@ -58,9 +59,18 @@ class _HomePageState extends State<HomePage> {
         password: _passwordController.text,
       );
       _apiService.updateUser(user).then((value) {
+        if(value != null){
+          showSnackSucessMessage(context, 'cloud', "Datos actualizados correctamente,");
+        }else{
+          showSnackErrorMessage(context, 'error', "Ocurrió un error, inténtalo nuevamente,");
+        }
 
       }).catchError((error){
-
+        showSnackErrorMessage(
+          context,
+          "cloud",
+          "Hubo un error. Revisa tu conexión a internet e inténtalo nuevamente.",
+        );
       });
     }
   }
