@@ -5,10 +5,12 @@ class ButtomNormalWidget extends StatelessWidget {
 
   String text;
   Function onPressed;
+  Color? color;
 
   ButtomNormalWidget({
     required this.text,
     required this.onPressed,
+    this.color,
 });
 
   @override
@@ -18,6 +20,7 @@ class ButtomNormalWidget extends StatelessWidget {
       height: 50.0,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          primary: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14.0),
             side: BorderSide.none,

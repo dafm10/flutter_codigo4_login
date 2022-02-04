@@ -16,7 +16,6 @@ class APIService {
     try {
       String _path = pathProduction + "/login/";
       Uri _uri = Uri.parse(_path);
-      print(user.toJson());
       http.Response response = await http.post(
         _uri,
         headers: {
@@ -130,4 +129,36 @@ class APIService {
       return Future.error("Error internet 3");
     }
   }
+
+  Future<User?> updateUser(User user) async {
+    try{
+      String _path = pathProduction + "/ciudadanos/${user.id}/";
+      Uri _uri = Uri.parse(_path);
+      http.Response response = await http.patch(
+        _uri,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          //"Authorization": "Jwt "+_prefs.token,
+        },
+        body: json.encode(user.toJson()),
+      );
+      if(response.statusCode == 200){
+        Map<String, dynamic> myMap = json.decode(response.body);
+        User user = User.fromJson(myMap);
+        return user;
+      }
+
+    } on TimeoutException catch (e) {
+      logger.i(e);
+      return Future.error("Error internet 1");
+    } on SocketException catch (e) {
+      logger.d(e);
+      return Future.error("Error internet 2");
+    } on Error catch (e) {
+      logger.e(e);
+      return Future.error("Error internet 3");
+    }
+  }
+
 }

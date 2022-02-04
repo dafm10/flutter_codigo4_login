@@ -46,7 +46,7 @@ class User {
     "telefono": telefono,
     "direccion": direccion,
     "password": password,
-    "tokern": token,
+    "token": token,
     "username": username,
   };
 }
