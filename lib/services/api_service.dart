@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:flutter_codigo4_login/helpers/sp_global.dart';
 import 'package:flutter_codigo4_login/helpers/utils.dart';
 import 'package:flutter_codigo4_login/models/user_model.dart';
 import 'package:logger/logger.dart';
@@ -9,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 class APIService {
   Logger logger = Logger();
+  final SPGlobal _prefs = SPGlobal();
 
   Future<User?> login(User user) async {
     try {
@@ -34,6 +36,7 @@ class APIService {
         Map<String, dynamic> myMap = json.decode(response.body);
         User user = User.fromJson(myMap["user"]);
         user.token = myMap["access"];
+        _prefs.token = myMap["access"];
         return user;
       }
     } on TimeoutException catch (e) {
@@ -73,6 +76,7 @@ class APIService {
         String source = Utf8Decoder().convert(response.bodyBytes);
         Map<String, dynamic> myMap = json.decode(source);
         User user = User.fromJson(myMap);
+        _prefs.token = user.token!;
         return user;
       }else if(response.statusCode == 400){
         Map<String, dynamic> myMap = json.decode(response.body);
